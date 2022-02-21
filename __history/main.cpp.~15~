@@ -13,6 +13,7 @@ typedef char _TCHAR;
 #define _tmain main
 //#endif
 
+
 #include "main.h"
 
 int _tmain(int argc, _TCHAR* argv[])

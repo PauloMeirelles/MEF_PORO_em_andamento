@@ -97,7 +97,7 @@ double Det( const V2D& m )
     Ind[m.size()+i]=i;
   }
   
-//não ta bom isso, melhorar!!!!!!!!!!!!!!!  (W.W.W)
+//não ta bom isso, melhorar!!!!!!!!!!!!!!!
   int k;
   if (m.size()>2) {k=0;} else {k=1;}
   for (int i=0; i<m.size()-k; i++) 

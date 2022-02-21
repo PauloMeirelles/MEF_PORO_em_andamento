@@ -1,17 +1,13 @@
 #pragma hdrstop
 #pragma argsused
 
-
-#include <iostream>
-#include "main.h"
-#include <math.h>
-
-//#ifdef _WIN32
+#ifdef _WIN32
 #include <tchar.h>
-//#else
-typedef char _TCHAR;
-#define _tmain main
-//#endif
+#else
+  typedef char _TCHAR;
+  #define _tmain main
+#endif
+
 
 #include "main.h"
 
@@ -23,7 +19,7 @@ int _tmain(int argc, _TCHAR* argv[])
     //int main (int argc, const char * argv[])
     {
         int k=0;
-		std::string EndCON="C:xxxxxxxxxxxx/config.txt";
+		std::string EndCON="C:/TesteCpp/EX_Poro/config.txt";
 		std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(7);
         tvNo No;
         tvEl El;
@@ -44,8 +40,8 @@ int _tmain(int argc, _TCHAR* argv[])
         int NNQ=0;
         for (int i=0; i<El.size(); i++)
         {
-			NNQ+=El[i].r_Quad()->r_NumberQuad();
-		}
+            NNQ+=El[i].r_Qua()->r_N();
+        }
         int NNP=0;  //!!!!!!!cuidado esta vaiavel e tudo que ela implica tem que ser seriamente repensada
         /// especialmente para os casos em que existem nós declarados que nao sao usados na estrutura....
         for (int i=0; i<No.size(); i++)
@@ -58,13 +54,13 @@ int _tmain(int argc, _TCHAR* argv[])
         MPHI.resize(NNQ,V1D (NNP,0.0));
         for (int i=0; i<El.size(); i++)
         {
-			for (int j=0; j<El[i].r_Quad()->r_NumberQuad(); j++)
-			{
-				for (int k=0; k<El[i].r_NNo(); k++)
+			for (int j=0; j<El[i].r_Qua()->r_N(); j++)
+            {
+                for (int k=0; k<El[i].r_NN(); k++)
                 {
-					MPHI[nj][El[i].r_No(k)->r_NumberNo()]=El[i].r_PHI(j,k);
-				}
-				nj=nj+1;
+                    MPHI[nj][El[i].r_No(k)->r_I()]=El[i].r_PHI(j,k);
+                }
+                nj=nj+1;
             }
         }
         V2D iMPHI;
@@ -81,7 +77,7 @@ int _tmain(int argc, _TCHAR* argv[])
         double Nx;
         double NDy;
         Nx=0;
-		for (int i=0; i<No.size(); i++) { for (int j=0; j<3; j++) { if (No[i].r_CondCountour(j)==0) { Nx+=pow(No[i].r_X(0,j),2.0); } } }
+        for (int i=0; i<No.size(); i++) { for (int j=0; j<3; j++) { if (No[i].r_CC(j)==0) { Nx+=pow(No[i].r_X(0,j),2.0); } } }
         Nx=pow(Nx,0.5);
         double Y;
         int ite;
@@ -92,7 +88,7 @@ int _tmain(int argc, _TCHAR* argv[])
             for (int i=0; i<El.size(); i++)
             {
                 El[i].ite();
-				for (int a=0; a<El[i].r_NNo(); a++)
+                for (int a=0; a<El[i].r_NN(); a++)
                 {
                     for (int z=0; z<2; z++)
                     {
@@ -111,19 +107,19 @@ int _tmain(int argc, _TCHAR* argv[])
 */
 
 
-						if (El[i].r_No(a)->r_Adress(z)>=0)
+                        if (El[i].r_No(a)->r_en(z)>=0)
                         {
-							Fint[El[i].r_No(a)->r_Adress(z)][0]+=El[i].r_Fint(El[i].r_dimension()*a+z);
-							Fext[El[i].r_No(a)->r_Adress(z)][0] =El[i].r_No(a)->r_PConcentrated(z);
-							_g[El[i].r_No(a)->r_Adress(z)] =Fext[El[i].r_No(a)->r_Adress(z)][0]-Fint[El[i].r_No(a)->r_Adress(z)][0];
-							for (int l=0; l<El[i].r_NNo(); l++)
+                            Fint[El[i].r_No(a)->r_en(z)][0]+=El[i].r_Fint(El[i].r_d()*a+z);
+                            Fext[El[i].r_No(a)->r_en(z)][0] =El[i].r_No(a)->r_P(z);
+                            _g[El[i].r_No(a)->r_en(z)] =Fext[El[i].r_No(a)->r_en(z)][0]-Fint[El[i].r_No(a)->r_en(z)][0];
+                            for (int l=0; l<El[i].r_NN(); l++)
                             {
                                 for (int k=0; k<2; k++)
                                 {
-									if (El[i].r_No(l)->r_Adress(k)>=0)
+                                    if (El[i].r_No(l)->r_en(k)>=0)
                                     {
-										H[El[i].r_No(a)->r_Adress(z)][El[i].r_No(l)->r_Adress(k)]+=El[i].r_Hessiana(El[i].r_dimension()*a+z,El[i].r_dimension()*l+k);
-										M[El[i].r_No(a)->r_Adress(z)][El[i].r_No(l)->r_Adress(k)]+=El[i].r_Mass(El[i].r_dimension()*a+z,El[i].r_dimension()*l+k);
+                                        H[El[i].r_No(a)->r_en(z)][El[i].r_No(l)->r_en(k)]+=El[i].r_H(El[i].r_d()*a+z,El[i].r_d()*l+k);
+                                        M[El[i].r_No(a)->r_en(z)][El[i].r_No(l)->r_en(k)]+=El[i].r_M(El[i].r_d()*a+z,El[i].r_d()*l+k);
                                     }
                                 }
                             }
@@ -231,10 +227,10 @@ int _tmain(int argc, _TCHAR* argv[])
             {
                 for (int j=0; j<2; j++)
                 {
-					if (No[i].r_CondCountour(j)==0)
+                    if (No[i].r_CC(j)==0)
                     {
-						k=k+1;    ///++K atualisa antes k++ atualisa depois;
-						Y=No[i].r_X(1,j)+Dy[k-1];
+                        k=k+1;    ///++K atualisa antes k++ atualisa depois;
+                        Y=No[i].r_X(1,j)+Dy[k-1];
                         No[i].w_X(1,j,Y);
                     }
                 }
@@ -251,7 +247,7 @@ int _tmain(int argc, _TCHAR* argv[])
                     int a=0;
                     for (int i=0; i<El.size(); i++)
                     {
-						for (int j=0; j<El[i].r_Quad()->r_NumberQuad(); j++)
+                        for (int j=0; j<El[i].r_Qua()->r_N(); j++)
                         {
                             GRA[a]=El[i].r_E(j,2*k1+k2);
                             a=a+1;
@@ -264,7 +260,7 @@ int _tmain(int argc, _TCHAR* argv[])
                     }
                     for (int i=0; i<El.size(); i++)
                     {
-						for (int j=0; j<El[i].r_NNo(); j++)
+                        for (int j=0; j<El[i].r_NN(); j++)
                         {
                             El[i].w_no_E(j,2*k1+k2,El[i].r_No(j)->r_no_E(2*k1+k2));
                         }
@@ -280,7 +276,7 @@ int _tmain(int argc, _TCHAR* argv[])
                     int a=0;
                     for (int i=0; i<El.size(); i++)
                     {
-						for (int j=0; j<El[i].r_Quad()->r_NumberQuad(); j++)
+                        for (int j=0; j<El[i].r_Qua()->r_N(); j++)
                         {
                             GRA[a]=El[i].r_S(j,2*k1+k2);
                             a=a+1;
@@ -293,7 +289,7 @@ int _tmain(int argc, _TCHAR* argv[])
                     }
                     for (int i=0; i<El.size(); i++)
                     {
-						for (int j=0; j<El[i].r_NNo(); j++)
+                        for (int j=0; j<El[i].r_NN(); j++)
                         {
                             El[i].w_no_S(j,2*k1+k2,El[i].r_No(j)->r_no_S(2*k1+k2));
                         }
@@ -305,7 +301,7 @@ int _tmain(int argc, _TCHAR* argv[])
             int aa=0;
             for (int i=0; i<El.size(); i++)
             {
-				for (int j=0; j<El[i].r_Quad()->r_NumberQuad(); j++)
+                for (int j=0; j<El[i].r_Qua()->r_N(); j++)
                 {
                     GRAa[aa]=El[i].r_ue(j);
                     aa=aa+1;
@@ -318,7 +314,7 @@ int _tmain(int argc, _TCHAR* argv[])
             }
             for (int i=0; i<El.size(); i++)
             {
-				for (int j=0; j<El[i].r_NNo(); j++)
+                for (int j=0; j<El[i].r_NN(); j++)
                 {
                     El[i].w_no_ue(j,El[i].r_No(j)->r_no_ue());
                 }
@@ -371,16 +367,16 @@ void Gera_VTK_69(CCo& Co, tvNo& No, tvEl& El, const int& ite)
     for (int i=0; i<El.size(); i++)
     {
         Sai2 << "10";
-		Sai2 << " " << El[i].r_No(0)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(6)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(9)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(1)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(3)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(7)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(8)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(5)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(2)->r_NumberNo();
-		Sai2 << " " << El[i].r_No(4)->r_NumberNo();
+        Sai2 << " " << El[i].r_No(0)->r_I();
+        Sai2 << " " << El[i].r_No(6)->r_I();
+        Sai2 << " " << El[i].r_No(9)->r_I();
+        Sai2 << " " << El[i].r_No(1)->r_I();
+        Sai2 << " " << El[i].r_No(3)->r_I();
+        Sai2 << " " << El[i].r_No(7)->r_I();
+        Sai2 << " " << El[i].r_No(8)->r_I();
+        Sai2 << " " << El[i].r_No(5)->r_I();
+        Sai2 << " " << El[i].r_No(2)->r_I();
+        Sai2 << " " << El[i].r_No(4)->r_I();
         Sai2 << std::endl;
     }
     Sai2 << std::endl;

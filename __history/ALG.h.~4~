@@ -7,7 +7,6 @@
 #include <iomanip>
 #include <stdexcept>
 #include <stdio.h>
-
 typedef std::vector< int > V1I;
 typedef std::vector< double > V1D;
 typedef std::vector< V1D  > V2D;
@@ -24,14 +23,14 @@ V2D transpose(const V2D matrix1);
 V2D cofactor(const V2D vect);
 V2D inverse(const V2D vect);
 void printMatrix(const V2D vect);
-// Criacao da Classe
+// Criação da Classe 
 class vetor
 {
   private:
-	int sz;	// numero de elementos
-	int* v;	// ponteiro para inteiros
+    int sz;	// número de elementos 
+    int* v;	// ponteiro para inteiros 
   public:
-	vetor(int);	// construtor
+    vetor(int);	// construtor 
     ~vetor();	// destrutor
 };
 //template<class T> T Det( const std::vector<std::vector< T > >& m );

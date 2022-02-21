@@ -10,7 +10,7 @@
 class CCo
 {
 private:
-  int  Nconfig;         ///<Numero
+  int  N;         ///<Numero
   std::string DIR;	    ///<Modulo de elasticidade
   std::string ArqMAT;	///<Nome Arq Materiais;
   std::string ArqNOS;	///<Nome Arq Nos;
@@ -21,7 +21,11 @@ private:
   std::string ArqCC ;   ///<Nome Arq Condeicoes de Contorno;
   std::string ArqP  ;   ///<Nome Arq Cargas Concentradas;
 public:
+<<<<<<< HEAD
   int  r_Nconfig() {return (Nconfig);}          ///<Numero
+=======
+  int  r_N() {return (N);}                      ///<Numero
+>>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
   std::string r_DIR() {return (DIR);}           ///<Diretorio do exemplo
   std::string r_ArqMAT() {return (ArqMAT);} 	///<Nome Arq Materiais;
   std::string r_ArqNOS() {return (ArqNOS);} 	///<Nome Arq Nos;

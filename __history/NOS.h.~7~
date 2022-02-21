@@ -41,11 +41,7 @@ class CNo
 	double r_no_S (int k1 ) {return (no_S[k1]);}                                      ///<Retorna (Le) as Tensoes de PK no No;
 	void   w_no_S (int k1, double Value) {no_S[k1]=Value;}                            ///<Altera (Escreve) as Tensoes de PK no No;
 	double r_no_ue() {return (no_ue);}                                                ///<Retorna (Le) a energia especifica de deformacao do No;
-<<<<<<< HEAD
-	void   w_no_ue()(double Val) {no_ue=Value;}                                         ///<Altera (Escreve) a energia especifica de deformacao do No;
-=======
 	void   w_no_ue(double Val) {no_ue=Value;}                                         ///<Altera (Escreve) a energia especifica de deformacao do No;
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 	CNo(const int& , const double& , const double& , const double& , const double&);  ///<Funcao contrtutora;
 	~CNo();                    ///< Classe Destrutora CNo ;
 };

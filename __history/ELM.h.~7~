@@ -30,13 +30,8 @@ class CEl
 
 // Variáveis armazenadas para cada nó do elemento:
 	std::vector< V1D > Xsi;     ///<Coordenadas adimensionais dos nós do elemento no espaço homogêneo
-<<<<<<< HEAD
 	//V2D FF;                                                   ///<Coeficientes das Funcoes de forma
 	//std::vector< V2D > dFF;                                   ///<Coeficientes das Derivadas direcionais das Funcoes de forma
-=======
-	V2D FF;                                                   ///<Coeficientes das Funcoes de forma
-	std::vector< V2D > dFF;                                   ///<Coeficientes das Derivadas direcionais das Funcoes de forma
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 	V1D Fint;                   ///< Vetor de forças internas
 	V2D Hessiana;               ///< Matrix Hessiana
 	std::vector< V1D >  no_E;   ///< Tensor de Deformação de Green-Lagrange
@@ -79,21 +74,12 @@ class CEl
 	int  r_DegreeApproxPol() {return (DegreeApproxPol);}     ///<Retorna o Grau do polinomio aproximador do elemento;
 	int  r_dDegreeApproxPol() {return (dDegreeApproxPol);}   ///<Retorna o Grau da primeira derivada do polinomio aproximador do elemento;
 	std::vector< V1D > r_Xsi() {return (Xsi);}               ///<Retorna coordenadas homogeneas na forma alocados em um vetor;
-<<<<<<< HEAD
 	//std::vector< V1D > r_FF() {return (FF);}
         
 	CNo *r_No(int i) {return (No[i]);}      ///<Retorna os nós geometricos locais(ponteiro)
 	int r_no(int i) {return (no[i]);}       ///<Retorna o numero global do no geometrico
 	CMa *r_Ma() {return (Ma);}              ///<Retorna o material do elemento (ponteiro)
-	int r_NMa() {return (NMa);}             ///<Retorna o número do material do elemento
-=======
-	std::vector< V1D > r_FF() {return (FF);}
-
-	CNo *r_No(int i) {return (No[i]);}      ///<Retorna os nós geometricos locais(ponteiro)
-	int r_no(int i) {return (no[i]);}       ///<Retorna o numero global do no geometrico
-	CMa *r_Ma() {return (Ma);}              ///<Retorna o material do elemento (ponteiro)
 	int r_ma() {return (ma);}               ///<Retorna o número do material do elemento
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 	CQuadratura *r_Quad() {return (Quad);}  ///<Retorna a Quadratura de integracao (ponteiro)
 	int r_NQuad() {return (NQuad);}         ///<Retorna o numero da Quadratura de integracao
 	CCo *r_Co() {return (Co);}              ///<Retorna Configuracoes como arquivo de entrada (ponteiro)
@@ -120,11 +106,7 @@ class CEl
 	void ite();
 
 
-<<<<<<< HEAD
 	void Imp_Rel_Geral();  // ----- NAO SEI O QUE FAZ  -----
-=======
-	void Imp_Rel_Geral();
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 	std::vector < std::vector <int > >  TriL(const int& DegreeApproxPol);
 	~CEl(); ///< Destrutor CEl
 };
@@ -145,7 +127,6 @@ void calc_Fint_H_M(const V1D& PHI, const V2D& DPHI, const V2D& Di, const V2D& Ai
 
 void cpto(const int& DegreeApproxPol,const int& NNo,const int& dimension,const V1D XsiNo,const V2D& FF,const V3D& dFF,  std::vector< CNo * > No, CMa *Ma, V1D& E, V1D& S, double& ue);
 
-<<<<<<< HEAD
 
 
 
@@ -158,9 +139,4 @@ void Le_Elementos(tvEl& El, tvNo& No, tvMa& Ma, tvQuadratura& Qua, CCo& Co);
 
 
 
-=======
-void Le_Elementos(tvEl& El, tvNo& No, tvMa& Ma, tvQuadratura& Qua, CCo& Co);
-
-
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 #endif

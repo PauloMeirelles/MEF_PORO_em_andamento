@@ -21,7 +21,7 @@ private:
   std::string ArqCC ;   ///<Nome Arq Condeicoes de Contorno;
   std::string ArqP  ;   ///<Nome Arq Cargas Concentradas;
 public:
-  int  r_I() {return (I);}                      ///<Numero
+  int  r_Nconfig() {return (Nconfig);}          ///<Numero
   std::string r_DIR() {return (DIR);}           ///<Diretorio do exemplo
   std::string r_ArqMAT() {return (ArqMAT);} 	///<Nome Arq Materiais;
   std::string r_ArqNOS() {return (ArqNOS);} 	///<Nome Arq Nos;

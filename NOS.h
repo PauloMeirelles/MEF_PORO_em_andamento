@@ -6,6 +6,15 @@
 #include <iostream> ///<std:: Cout and cin;
 #include "ALG.h"    ///<Inclui o cabeçalho ALG.h;
 
+/* --- (A SE VERIFICAR) -- (VERIFICAR SE NAO PRECISA PUXAR ELM.h)
+ class CVAR
+{
+  V2D    X[2][2];	///< coordenadas iniciais e finais do no;
+  V2D    U[2];      ///< Deslocamento do Nó;
+  V1D    E[9];      ///< Deformação de Cauchy-Green
+  V1D    S[9];      ///< Tensão de Cauchy-Green
+};
+*/
 ///Classe: Nos Geometricos Elemento Finito Triangular (2D);
 class CNo
 {
@@ -41,7 +50,7 @@ class CNo
 	double r_no_S (int k1 ) {return (no_S[k1]);}                                      ///<Retorna (Le) as Tensoes de PK no No;
 	void   w_no_S (int k1, double Value) {no_S[k1]=Value;}                            ///<Altera (Escreve) as Tensoes de PK no No;
 	double r_no_ue() {return (no_ue);}                                                ///<Retorna (Le) a energia especifica de deformacao do No;
-	void   w_no_ue(double Val) {no_ue=Value;}                                         ///<Altera (Escreve) a energia especifica de deformacao do No;
+	void   w_no_ue(double Value) {no_ue=Value;}                                         ///<Altera (Escreve) a energia especifica de deformacao do No;
 	CNo(const int& , const double& , const double& , const double& , const double&);  ///<Funcao contrtutora;
 	~CNo();                    ///< Classe Destrutora CNo ;
 };

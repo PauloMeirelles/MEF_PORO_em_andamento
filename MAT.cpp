@@ -1,14 +1,14 @@
 #include "MAT.h"
 
-CMa::CMa(const int& _I, const double& _E0, const double& _Ps0)
+CMa::CMa(const int& _NMat, const double& _E0, const double& _Nu0)
 {
-  I=_I;
+  NMat=_NMat;
   E0=_E0;
-  Ps0=_Ps0;
-  Et=E0/(2.0*(1.0+Ps0));
-  Kd=E0/(3.0*(1.0-2.0*Ps0));
-  lameM=Et;
-  lameL=2.0*Et*Ps0/(1.0-2.0*Ps0);
+  Nu0=_Nu0;
+  Et=E0/(2.0*(1.0+Nu0));
+  Kd=E0/(3.0*(1.0-2.0*Nu0));
+  LameM=Et;
+  LameL=2.0*Et*Nu0/(1.0-2.0*Nu0);
 }
 
 tvMa Le_Mat(const std::string& NAr)
@@ -21,13 +21,13 @@ tvMa Le_Mat(const std::string& NAr)
   Ent.getline(s,1000);
   Ent >>  nMa; Ent.getline(s,1000);
   Ent.getline(s,1000);
-  for (i=0; i<nMa; i++) 
+  for (i=0; i<nMa; i++)
   {
 	double _E0;
-	double _Ps0;
-	int I;
-	Ent >> I >> _E0 >> _Ps0; Ent.getline(s,1000);
-	Ma.push_back(CMa(I,_E0,_Ps0));
+	double _Nu0;
+	int NMat;
+	Ent >> NMat >> _E0 >> _Nu0; Ent.getline(s,1000);
+	Ma.push_back(CMa(NMat,_E0,_Nu0));
   }
   Ent.close();
   return Ma;

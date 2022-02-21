@@ -1,5 +1,5 @@
 Informe a pasta dos dados: 
-C:\Users\wesle\OneDrive\Área de Trabalho\4070 Aulas\PFEM\Codigos\Teste01\exemplo01\
+E:\-----MESTRADO_IMPORTANTE-----\CODIGOS\MEF_PORO_em_andamento\exemplo00\
 Informe o arquivo de Materiais:
 listademateriais.txt
 Informe o arquivo de Nos:

@@ -20,25 +20,25 @@ class CEl
 	int dimension;              ///<Dimensoes do elemento 1:1D 2:2D ou 3:3D;
 	int DegreeApproxPol;        ///<Grau do polinomio aproximador do elemento;
 	int dDegreeApproxPol;       ///<Grau da primeira derivada do polinomio aproximador do elemento;
-	std::vector< CNo * > No;	                              ///<Nos do elemento(ponteiro)
-	std::vector< int > no;                                    ///<Numero global dos nos do elemento
-	CMa *Ma;                    ///<Acesso a classe do Material do elemento (ponteiro)
+	std::vector< CNo * > No;	///<Nos do elemento(ponteiro)
+	std::vector< int > no;      ///<Numero global dos nos do elemento
+	CMa* Ma;                    ///<Acesso a classe do Material do elemento (ponteiro)
 	int NMa;                    ///<Numero do Material do elemento
 	CQuadratura *Quad;          ///<Acesso a classe de quadratura de integracao (ponteiro)
 	int NQuad;                  ///<Numero da Quadratura de integracao
-	CCo *Co;                    ///<Acesso configuracoes como arquivo de entrada (ponteiro)
+	CCo* Config;                    ///<Acesso configuracoes como arquivo de entrada (ponteiro)
 
 // Variáveis armazenadas para cada nó do elemento:
 	std::vector< V1D > Xsi;     ///<Coordenadas adimensionais dos nós do elemento no espaço homogêneo
-	//V2D FF;                                                   ///<Coeficientes das Funcoes de forma
-	//std::vector< V2D > dFF;                                   ///<Coeficientes das Derivadas direcionais das Funcoes de forma
+	V2D FF;                     ///<Coeficientes das Funcoes de forma
+	std::vector< V2D > dFF;     ///<Coeficientes das Derivadas direcionais das Funcoes de forma
 	V1D Fint;                   ///< Vetor de forças internas
 	V2D Hessiana;               ///< Matrix Hessiana
 	std::vector< V1D >  no_E;   ///< Tensor de Deformação de Green-Lagrange
 	std::vector< V1D >  no_S;   ///< Tensor de Tensões de PiolaKirchhoff de segunda espécie
 	std::vector< double > no_ue;///< Energia específica de deformação
 
-	//V2D Mass;                                                  ///< Matrix de Massa
+	V2D Mass;                   ///< Matrix de Massa
 
 // Variáveis armazenadas por elemento:
 	double Ue;                  ///< Energia de deformação
@@ -46,7 +46,7 @@ class CEl
 	std::vector< V1D >  PHI;    ///< Valor das funções de forma nos pontos de integração
 	std::vector< V2D >  DPHI;   ///< Valor da primeira derivada das funcoes de forma nos pontos de integração
 
-    
+
 	std::vector< V1D >  X;      ///< Posição do ponto de integração na configuração inicial
 	std::vector< V2D >  A0;     ///< Gradiente da função mudança de configuração (inicial)
 	std::vector< double > J0;   ///< Determinante do Gradiente de tranformação inicial (Jacobiano da transformação)
@@ -62,8 +62,8 @@ class CEl
 	std::vector< double > ue;   ///< Energia específica de deformação
 	std::vector< V1D >  fint;   ///< Vetor de forças específica* internas
 	std::vector< V2D >  h;      ///< Matrix Hesiana específica*
-    
-	//std::vector< V2D > m;       ///< Matrix de Massa espefífica
+
+	std::vector< V2D > m;       ///< Matrix de Massa espefífica
 
 	int c_NNEl1m();
   public:
@@ -74,17 +74,17 @@ class CEl
 	int  r_DegreeApproxPol() {return (DegreeApproxPol);}     ///<Retorna o Grau do polinomio aproximador do elemento;
 	int  r_dDegreeApproxPol() {return (dDegreeApproxPol);}   ///<Retorna o Grau da primeira derivada do polinomio aproximador do elemento;
 	std::vector< V1D > r_Xsi() {return (Xsi);}               ///<Retorna coordenadas homogeneas na forma alocados em um vetor;
-	//std::vector< V1D > r_FF() {return (FF);}
-        
+	std::vector< V1D > r_FF() {return (FF);}
+
 	CNo *r_No(int i) {return (No[i]);}      ///<Retorna os nós geometricos locais(ponteiro)
 	int r_no(int i) {return (no[i]);}       ///<Retorna o numero global do no geometrico
 	CMa *r_Ma() {return (Ma);}              ///<Retorna o material do elemento (ponteiro)
-	int r_ma() {return (ma);}               ///<Retorna o número do material do elemento
+	int r_NMa() {return (NMa);}           ///<Retorna o número do material do elemento
 	CQuadratura *r_Quad() {return (Quad);}  ///<Retorna a Quadratura de integracao (ponteiro)
 	int r_NQuad() {return (NQuad);}         ///<Retorna o numero da Quadratura de integracao
-	CCo *r_Co() {return (Co);}              ///<Retorna Configuracoes como arquivo de entrada (ponteiro)
+	CCo *r_Co() {return (Config);}              ///<Retorna Configuracoes como arquivo de entrada (ponteiro)
 	double r_Hessiana(int i, int j) {return (Hessiana[i][j]);}
-	//double r_Mass(int i, int j) {return (Mass[i][j]);}
+	double r_Mass(int i, int j) {return (Mass[i][j]);}
     double r_E(int n, int i) {return (E[n][i]);}
     double r_S(int n, int i) {return (S[n][i]);}
     double r_ue(int n) {return (ue[n]);}
@@ -100,13 +100,13 @@ class CEl
     void   w_no_ue(int nno,double val) {no_ue[nno]=val; }
 	double r_no_Y(int nno,int dir) { return No[nno]->r_X(1,dir); }   ///< Retorna a posicao deslocada do no escolhido
 	double r_no_U(int nno,int dir) { return (No[nno]->r_X(1,dir)-No[nno]->r_X(0,dir)); }   ///< Retorna o deslocamento do no escolhido
-    
-    
+
+
 	CEl(const int&, const int&, const int&, tvMa&, const int&, const V1I&, tvNo&, const int&, tvQuadratura&, CCo&);
 	void ite();
 
 
-	void Imp_Rel_Geral();  // ----- NAO SEI O QUE FAZ  -----
+	void Imp_Rel_Geral();
 	std::vector < std::vector <int > >  TriL(const int& DegreeApproxPol);
 	~CEl(); ///< Destrutor CEl
 };
@@ -127,16 +127,7 @@ void calc_Fint_H_M(const V1D& PHI, const V2D& DPHI, const V2D& Di, const V2D& Ai
 
 void cpto(const int& DegreeApproxPol,const int& NNo,const int& dimension,const V1D XsiNo,const V2D& FF,const V3D& dFF,  std::vector< CNo * > No, CMa *Ma, V1D& E, V1D& S, double& ue);
 
-
-
-
 void Le_Elementos(tvEl& El, tvNo& No, tvMa& Ma, tvQuadratura& Qua, CCo& Co);
-
-
-
-
-
-
 
 
 #endif

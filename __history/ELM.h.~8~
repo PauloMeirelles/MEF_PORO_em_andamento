@@ -20,8 +20,8 @@ class CEl
 	int dimension;              ///<Dimensoes do elemento 1:1D 2:2D ou 3:3D;
 	int DegreeApproxPol;        ///<Grau do polinomio aproximador do elemento;
 	int dDegreeApproxPol;       ///<Grau da primeira derivada do polinomio aproximador do elemento;
-	std::vector< CNo * > No;	///<Nos do elemento(ponteiro)
-	std::vector< int > no;      ///<Numero global dos nos do elemento
+	std::vector< CNo * > No;	                              ///<Nos do elemento(ponteiro)
+	std::vector< int > no;                                    ///<Numero global dos nos do elemento
 	CMa *Ma;                    ///<Acesso a classe do Material do elemento (ponteiro)
 	int NMa;                    ///<Numero do Material do elemento
 	CQuadratura *Quad;          ///<Acesso a classe de quadratura de integracao (ponteiro)
@@ -30,15 +30,15 @@ class CEl
 
 // Variáveis armazenadas para cada nó do elemento:
 	std::vector< V1D > Xsi;     ///<Coordenadas adimensionais dos nós do elemento no espaço homogêneo
-	V2D FF;                     ///<Coeficientes das Funcoes de forma
-	std::vector< V2D > dFF;     ///<Coeficientes das Derivadas direcionais das Funcoes de forma
+	V2D FF;                                                   ///<Coeficientes das Funcoes de forma
+	std::vector< V2D > dFF;                                   ///<Coeficientes das Derivadas direcionais das Funcoes de forma
 	V1D Fint;                   ///< Vetor de forças internas
 	V2D Hessiana;               ///< Matrix Hessiana
 	std::vector< V1D >  no_E;   ///< Tensor de Deformação de Green-Lagrange
 	std::vector< V1D >  no_S;   ///< Tensor de Tensões de PiolaKirchhoff de segunda espécie
 	std::vector< double > no_ue;///< Energia específica de deformação
 
-	V2D Mass;                   ///< Matrix de Massa
+	//V2D Mass;                                                  ///< Matrix de Massa
 
 // Variáveis armazenadas por elemento:
 	double Ue;                  ///< Energia de deformação
@@ -63,7 +63,7 @@ class CEl
 	std::vector< V1D >  fint;   ///< Vetor de forças específica* internas
 	std::vector< V2D >  h;      ///< Matrix Hesiana específica*
     
-	std::vector< V2D > m;       ///< Matrix de Massa espefífica
+	//std::vector< V2D > m;       ///< Matrix de Massa espefífica
 
 	int c_NNEl1m();
   public:
@@ -84,7 +84,7 @@ class CEl
 	int r_NQuad() {return (NQuad);}         ///<Retorna o numero da Quadratura de integracao
 	CCo *r_Co() {return (Co);}              ///<Retorna Configuracoes como arquivo de entrada (ponteiro)
 	double r_Hessiana(int i, int j) {return (Hessiana[i][j]);}
-	double r_Mass(int i, int j) {return (Mass[i][j]);}
+	//double r_Mass(int i, int j) {return (Mass[i][j]);}
     double r_E(int n, int i) {return (E[n][i]);}
     double r_S(int n, int i) {return (S[n][i]);}
     double r_ue(int n) {return (ue[n]);}

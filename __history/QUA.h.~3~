@@ -28,6 +28,6 @@ class CQuadratura  //Dunavant/Hammer Triangulo (2D)
 };
 typedef std::vector< CQuadratura> tvQuadratura; 	//Vetor de Quadratura;
 
-void Le_Quadraturas(tvQuadratura& Qua, const std::string& NAr);   //Verificar se NAr é uma var para leitura de entrada de dados
+void Le_Quadraturas(tvQuadratura& Qua, const std::string& NAr);
 
 #endif

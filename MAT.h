@@ -17,7 +17,7 @@ class CMa
 	double LameM;	    ///<Segunda Constante de lame = G = Et
 	double LameL;	    ///<Primeira Constante de Lame = 2*G*Nu/(1-2*Nu)
   public:
-	int    r_NMat() {return (NMat);}      ///<Escreve a numeração do Material;
+	int    r_NMat() {return (NMat);}      ///<Escreve a numeraÃ§Ã£o do Material;
 	double r_E0() {return (E0);}          ///<Escreve o E0;
 	double r_Nu0() {return (Nu0);}        ///<Escreve o Nu0;
 	double r_Et() {return (Et);}          ///<Escreve o Et;

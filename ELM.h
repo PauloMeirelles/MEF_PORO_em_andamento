@@ -22,11 +22,7 @@ class CEl
 	int dDegreeApproxPol;       ///<Grau da primeira derivada do polinomio aproximador do elemento;
 	std::vector< CNo * > No;	///<Nos do elemento(ponteiro)
 	std::vector< int > no;      ///<Numero global dos nos do elemento
-<<<<<<< HEAD
 	CMa* Ma;                    ///<Acesso a classe do Material do elemento (ponteiro)
-=======
-	CMa *Ma;                    ///<Acesso a classe do Material do elemento (ponteiro)
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 	int NMa;                    ///<Numero do Material do elemento
 	CQuadratura *Quad;          ///<Acesso a classe de quadratura de integracao (ponteiro)
 	int NQuad;                  ///<Numero da Quadratura de integracao
@@ -66,11 +62,7 @@ class CEl
 	std::vector< double > ue;   ///< Energia específica de deformação
 	std::vector< V1D >  fint;   ///< Vetor de forças específica* internas
 	std::vector< V2D >  h;      ///< Matrix Hesiana específica*
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 	std::vector< V2D > m;       ///< Matrix de Massa espefífica
 
 	int c_NNEl1m();

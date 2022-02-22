@@ -23,11 +23,7 @@ int _tmain(int argc, _TCHAR* argv[])
     //int main (int argc, const char * argv[])
 	//{
         int k=0;
-<<<<<<< HEAD
 		std::string EndCON="E:/-----MESTRADO_IMPORTANTE-----/CODIGOS/outros/08_12_2021/MEF_PORO_ATT_WILSON/PFEM_Poro_Atual/config.txt";
-=======
-		std::string EndCON="C:xxxxxxxxxxxx/config.txt";
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 		std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(7);
 		tvNo No;
 		tvEl El;
@@ -37,7 +33,7 @@ int _tmain(int argc, _TCHAR* argv[])
         int ngl;
 		//Apaga os arquivos a serem preenchidos com os relatorios...
 		std::string NArq1; NArq1.append(Co.r_ArqREL()); //NArq1.append("resultados/Saida_Triang.txt");
-		std::ofstream Sai1;   Sai1.open(NArq1.c_str()); ///< número de nós e matriz a ser invertida
+		std::ofstream Sai1;   Sai1.open(NArq1.c_str()); ///< nÃºmero de nÃ³s e matriz a ser invertida
 		Sai1.close();
 		Le_Quadraturas(Qua,Co.r_ArqQUA());
 		std::cout << Co.r_ArqNOS() << std::endl;
@@ -51,12 +47,8 @@ int _tmain(int argc, _TCHAR* argv[])
         {
 			NNQ+=El[i].r_Quad()->r_NumberQuad();
 		}
-<<<<<<< HEAD
 		int NNP=0;  //!!!!!!!cuidado esta vaiavel e tudo que ela implica tem que ser seriamente repensada
-=======
-        int NNP=0;  //!!!!!!!cuidado esta vaiavel e tudo que ela implica tem que ser seriamente repensada
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
-        /// especialmente para os casos em que existem nós declarados que nao sao usados na estrutura....
+        /// especialmente para os casos em que existem nÃ³s declarados que nao sao usados na estrutura....
         for (int i=0; i<No.size(); i++)
         {
 			NNP+=No[i].r_FP();
@@ -106,16 +98,6 @@ int _tmain(int argc, _TCHAR* argv[])
 					for (int z=0; z<2; z++)
 					{
 
-<<<<<<< HEAD
-=======
-            for (int i=0; i<El.size(); i++)
-            {
-                El[i].ite();
-				for (int a=0; a<El[i].r_NNo(); a++)
-                {
-                    for (int z=0; z<2; z++)
-                    {
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 
 /*
                         InteiraFint[2*El[i].r_No(a)->r_I()+z][0]+=El[i].r_Fint(2*a+z);
@@ -132,11 +114,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 						if (El[i].r_No(a)->r_Adress(z)>=0)
-<<<<<<< HEAD
 						{
-=======
-                        {
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 							Fint[El[i].r_No(a)->r_Adress(z)][0]+=El[i].r_Fint(El[i].r_dimension()*a+z);
 							Fext[El[i].r_No(a)->r_Adress(z)][0] =El[i].r_No(a)->r_PConcentrated(z);
 							_g[El[i].r_No(a)->r_Adress(z)] =Fext[El[i].r_No(a)->r_Adress(z)][0]-Fint[El[i].r_No(a)->r_Adress(z)][0];
@@ -148,11 +126,7 @@ int _tmain(int argc, _TCHAR* argv[])
                                     {
 										H[El[i].r_No(a)->r_Adress(z)][El[i].r_No(l)->r_Adress(k)]+=El[i].r_Hessiana(El[i].r_dimension()*a+z,El[i].r_dimension()*l+k);
 										M[El[i].r_No(a)->r_Adress(z)][El[i].r_No(l)->r_Adress(k)]+=El[i].r_Mass(El[i].r_dimension()*a+z,El[i].r_dimension()*l+k);
-<<<<<<< HEAD
 									}
-=======
-                                    }
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
                                 }
                             }
                         }
@@ -259,11 +233,7 @@ int _tmain(int argc, _TCHAR* argv[])
                 for (int j=0; j<2; j++)
                 {
 					if (No[i].r_CondCountour(j)==0)
-<<<<<<< HEAD
 					{
-=======
-                    {
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 						k=k+1;    ///++K atualisa antes k++ atualisa depois;
 						Y=No[i].r_X(1,j)+Dy[k-1];
                         No[i].w_X(1,j,Y);
@@ -281,11 +251,7 @@ int _tmain(int argc, _TCHAR* argv[])
                     V1D GRB; GRB.resize(NNP,0.0);
                     int a=0;
                     for (int i=0; i<El.size(); i++)
-<<<<<<< HEAD
 					{
-=======
-                    {
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 						for (int j=0; j<El[i].r_Quad()->r_NumberQuad(); j++)
                         {
                             GRA[a]=El[i].r_E(j,2*k1+k2);
@@ -327,11 +293,7 @@ int _tmain(int argc, _TCHAR* argv[])
                         No[i].w_no_S(2*k1+k2,GRB[i]);
                     }
                     for (int i=0; i<El.size(); i++)
-<<<<<<< HEAD
 					{
-=======
-                    {
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 						for (int j=0; j<El[i].r_NNo(); j++)
                         {
                             El[i].w_no_S(j,2*k1+k2,El[i].r_No(j)->r_no_S(2*k1+k2));
@@ -345,11 +307,7 @@ int _tmain(int argc, _TCHAR* argv[])
             for (int i=0; i<El.size(); i++)
             {
 				for (int j=0; j<El[i].r_Quad()->r_NumberQuad(); j++)
-<<<<<<< HEAD
 				{
-=======
-                {
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
                     GRAa[aa]=El[i].r_ue(j);
                     aa=aa+1;
                 }
@@ -485,4 +443,3 @@ void Gera_VTK_69(CCo& Co, tvNo& No, tvEl& El, const int& ite)
     Sai2 << std::endl;
     Sai2.close();
 }
-

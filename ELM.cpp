@@ -1,26 +1,16 @@
 ﻿#include "ELM.h"
 
-<<<<<<< HEAD
 CEl::CEl(const int& _NEl, const int& _DegreeApproxPol, const int& _NMa, tvMa& vMa, const int& _NNo, const V1I& vNNo, tvNo& vNo, const int& _NQuad, tvQuadratura& _Quad, CCo& _Co)
 {
   NEl=_NEl;
   dimension=2;
   DegreeApproxPol=_DegreeApproxPol;
   NNo=_NNo;
-=======
-CEl::CEl(const int& NEl, const int& DegreeApproxPol, const int& NMa, tvMa& vMa, const int& NNo, const V1I& vNNo, tvNo& vNo, const int& NQuad, tvQuadratura& Qua, CCo& Co)
-{
-  this->NEl=NEl;
-  this->dimension=2;
-  this->DegreeApproxPol=DegreeApproxPol;
-  this->NNo=NNo;
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
   dDegreeApproxPol=DegreeApproxPol-1;
   NNEl1m=c_NNEl1m();
   for (int a=0; a<this->NNo; a++)
   {
 	No.push_back(&vNo[vNNo[a]]);
-<<<<<<< HEAD
 	no.push_back( vNo[vNNo[a]].r_NumberNo());
 	No[a]->w_FP(1);
   }
@@ -29,16 +19,6 @@ CEl::CEl(const int& NEl, const int& DegreeApproxPol, const int& NMa, tvMa& vMa, 
   NQuad=_NQuad;
   Quad=&_Quad[NQuad];
   Config=&_Co;
-=======
-	no.push_back( vNo[vNNo[a]].r_NEl());
-	No[a]->w_FP(1);
-  }
-  this->NMa=NMa;
-  this->Ma=&vMa[NMa];
-  this->NQuad=NQuad;
-  this->Quad=&Quad[NQuad];
-  this->Co=&Co;
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
   Xsi.resize(NNo);
   FF.resize(NNo);
   no_E.resize(NNo);
@@ -59,11 +39,7 @@ CEl::CEl(const int& NEl, const int& DegreeApproxPol, const int& NMa, tvMa& vMa, 
   Fint.resize(dimension*NNo,0.0);
   Hessiana.resize(dimension*NNo,V1D(dimension*NNo,0.0));
 //  Mass.resize(dimension*NNo,V1D(dimension*NNo,0.0));
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
   PHI.resize(r_Quad()->r_NumberQuad());
   DPHI.resize(r_Quad()->r_NumberQuad());
   X.resize(r_Quad()->r_NumberQuad());
@@ -122,17 +98,10 @@ void CEl::ite()
 {
   double beta_=1.0;
   double deltat_=1.0;
-<<<<<<< HEAD
 
 
 
 
-=======
-    
-    
-    
-    
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
   for (int i=0; i<dimension*NNo; i++)
   {
     Fint[i]=0.0;
@@ -147,20 +116,13 @@ void CEl::ite()
   {
 	Y[i]=calc_Xn(dimension,  PHI[i],No,1);
     A1[i]=calc_An(DPHI[i],No,1); // Gradiente de tranformação final
-<<<<<<< HEAD
     J1[i]=Det(A1[i]);
 	A[i]=MM(A1[i],invA0[i]);
     C[i]=MtM(A[i],A[i]);
-=======
-    J1[i]=Det(A1[i]);                    
-	A[i]=MM(A1[i],invA0[i]);
-    C[i]=MtM(A[i],A[i]);    
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
     E[i]=calc_Ei(C[i]); //executa a cada iteracao para cada ponto de gauss e armazena Si=due_dE, e CCi=d2ue_dEdE
 	CC[i]=calc_CC(dimension,Ma); // Calculo do tensor contitutivo de Piola-Kirchhoff de segunda espécie;
 	S[i]=calc_S(dimension,E[i],CC[i]); // Calculo da Tensões de Green;
 	calc_Fint_H_M(PHI[i],DPHI[i],invA0[i],A[i],S[i],CC[i],fint[i],h[i],m[i]);   // Calculo do vetor de forças internas e da matriz Hesiana
-<<<<<<< HEAD
 
 
 
@@ -168,15 +130,6 @@ void CEl::ite()
 
 
 
-=======
-      
-      
-      
-      
-      
-      
-      
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
     ue[i]=c_ue(E[i],Ma);
 	Ue=Ue+ue[i]*J0[i]*r_Quad()->r_W(i);
 	for (int a=0; a<NNo; a++)
@@ -189,11 +142,7 @@ void CEl::ite()
 		  for (int k=0; k<dimension; k++)
           {
 			Hessiana[dimension*a+z][dimension*l+k]+=h[i][dimension*a+z][dimension*l+k]*J0[i]*r_Quad()->r_W(i);
-<<<<<<< HEAD
 			if (z==k) Mass[dimension*a+z][dimension*l+k] += (m[i][dimension*a+z][dimension*l+k]/(beta_ * deltat_ * deltat_))*J0[i]*r_Quad()->r_W(i);/**/ //mass contribution
-=======
-			if (z==k) Mass[d*a+z][dimension*l+k] += (m[i][dimension*a+z][dimension*l+k]/(beta_ * deltat_ * deltat_))*J0[i]*r_Quad()->r_W(i);/**/ //mass contribution
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
           }
         }
       }
@@ -243,11 +192,8 @@ void cpto(const int& dDegreeApproxPol,const int& NNo,const int& dimension,const 
   fint.resize(dimension*NNo,0.0);
   h.resize(dimension*NNo,V1D (dimension*NNo,0.0));
   m.resize(dimension*NNo,V1D (dimension*NNo,0.0));
-<<<<<<< HEAD
   std::cout << " " << m[0][0] << std::endl;
 
-=======
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 //  std::cout << "Xsi " << XsiNo[0] << " " << XsiNo[1] << " " << XsiNo[2] << std::endl;
 //  std::cout << "FF"<< std::endl; for (int jj=0; jj<NN; jj++) {   for (int ii=0; ii<NN; ii++) { std::cout << FF[jj][ii] << " "; } std::cout<<std::endl; }
   PHI =calc_PHI (dDegreeApproxPol,NNo,dimension,XsiNo,FF);//std::cout << "PHI"<< std::endl; for (int ii=0; ii<PHI.size(); ii++) { std::cout << PHI[0] << " "; } std::cout<<std::endl;
@@ -258,17 +204,10 @@ void cpto(const int& dDegreeApproxPol,const int& NNo,const int& dimension,const 
   invA0=inverse(A0);
   Y=calc_Xn(dimension,  PHI,No,1); //  std::cout << "Y " << Y[0] << " " << Y[1] << " " << Y[2] << std::endl;
   A1=calc_An(DPHI,No,1); // Gradiente de tranformação final
-<<<<<<< HEAD
   J1=Det(A1);
   A=MM(A1,invA0); // std::cout << "A " << A[0][0] << " " << A[0][1] << " " << A[0][2] << " " << A[1][0] << " " << A[1][1] << " " << A[1][2] << " " << A[2][0] << " " << A[2][1] << " " << A[2][2] << std::endl;
   C=MtM(A,A);  //std::cout << "C " << C[0][0] << " " << C[0][1] << " " << C[0][2] << " " << C[1][0] << " " << C[1][1] << " " << C[1][2] << " " << C[2][0] << " " << C[2][1] << " " << C[2][2] << std::endl;
   E=calc_Ei(C); // std::cout << "E " << E[0][0] << " " << E[0][1] << " " << E[0][2] << " " << E[1][0] << " " << E[1][1] << " " << E[1][2] << " " << E[2][0] << " " << E[2][1] << " " << E[2][2] << std::endl;
-=======
-  J1=Det(A1);                    
-  A=MM(A1,invA0); // std::cout << "A " << A[0][0] << " " << A[0][1] << " " << A[0][2] << " " << A[1][0] << " " << A[1][1] << " " << A[1][2] << " " << A[2][0] << " " << A[2][1] << " " << A[2][2] << std::endl;
-  C=MtM(A,A);  //std::cout << "C " << C[0][0] << " " << C[0][1] << " " << C[0][2] << " " << C[1][0] << " " << C[1][1] << " " << C[1][2] << " " << C[2][0] << " " << C[2][1] << " " << C[2][2] << std::endl; 
-  E=calc_Ei(C); // std::cout << "E " << E[0][0] << " " << E[0][1] << " " << E[0][2] << " " << E[1][0] << " " << E[1][1] << " " << E[1][2] << " " << E[2][0] << " " << E[2][1] << " " << E[2][2] << std::endl; 
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
   CC=calc_CC(dimension,Ma); // Calculo do tensor contitutivo de Piola-Kirchhoff de segunda espécie;
   S=calc_S(dimension,E,CC); // Calculo da Tensões de Green;
   calc_Fint_H_M(PHI,DPHI,invA0,A,S,CC,fint,h,m);   // Calculo do vetor de forças internas e da matriz Hesiana
@@ -316,11 +255,7 @@ int CEl::c_NNEl1m()
 V2D c_Xsi(const int& NNo, const int& DegreeApproxPol, const int& dimension)
 {
   V2D Xsi; Xsi.resize(NNo, V1D (dimension,0.0));
-<<<<<<< HEAD
 // NN que é dado pode também ser calculado por: NN=(Pe+1)*(2+Pe)/2;
-=======
-// NN que é dado pode também ser calculado por: NN=(Pe+1)*(2+Pe)/2;		
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 // Calcula as Coordenadas Adimensionais dos Nós
   for (int I=0; I<(DegreeApproxPol+1); I++)
   {
@@ -341,21 +276,13 @@ V2D c_FF(const int& NNo, const int& DegreeApproxPol, const V2D& Xsi)
 {
   V2D MAT;        MAT.resize(NNo,V1D(NNo,0.0));
   V2D FF;         FF.resize(NNo,V1D(NNo,0.0));
-<<<<<<< HEAD
 // NN que é dado pode também ser calculado por: NN=(Pe+1)*(2+Pe)/2;
-=======
-// NN que é dado pode também ser calculado por: NN=(Pe+1)*(2+Pe)/2;		
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 // Calcula a Matriz a ser Invertida para a determinacao dos Coeficientes das Funcoes de forma
   for (int L=0; L<NNo; L++)
   {
 	for (int I=0; I<(DegreeApproxPol+1); I++)
     {
-<<<<<<< HEAD
       for (int J=0; J<(I+1); J++)
-=======
-      for (int J=0; J<(I+1); J++) 
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 	  {
         int K;
         K=I+((I-1)*I)/2+J;
@@ -408,11 +335,7 @@ V1D calc_PHI(const int& DegreeApproxPol, const int& NNo, const int dimension, co
     {
       for (int J=0; J<(I+1); J++)
       {
-<<<<<<< HEAD
         int K;
-=======
-        int K;    
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
 		K=I+((I-1)*I)/2+J;
 		PHIi[L]+=FF[K][L]*(pow(Xsi[0],(I-J)))*(pow(Xsi[1],(J)));	// valores das funcoes de forma no ponto com...
       }															// ...coordenadas (COORD1,COORD2)

@@ -15,7 +15,7 @@ class CQuadratura  //Dunavant/Hammer Triangulo (2D)
 	int          nXsi;                         ///< Numero de coordenadas adimensionais Qsi;
 	V2D           Xsi;                         ///< Vetor 2D de Coordenadas Qsi;
 	V1D             W;                         ///< Pesos da quadratura;
-	void FPDunavant();                         ///< Funcao que gera os pontos de Dunavant/Hammer no intervalo de 0 a 1 no espaço homogeneo para (pontos de integracao 2D) grau 1 a 20;
+	void FPDunavant();                         ///< Funcao que gera os pontos de Dunavant/Hammer no intervalo de 0 a 1 no espaÃ§o homogeneo para (pontos de integracao 2D) grau 1 a 20;
   public:
 	CQuadratura(int Quad, int& DegreeApprox);        ///< Funcao construtora das coordenadas Xsi e dos respectivos pesos da Quadratura;
 	~CQuadratura();                                  ///< Destrutor da classe Quadratura
@@ -28,6 +28,6 @@ class CQuadratura  //Dunavant/Hammer Triangulo (2D)
 };
 typedef std::vector< CQuadratura> tvQuadratura; 	//Vetor de Quadratura;
 
-void Le_Quadraturas(tvQuadratura& Qua, const std::string& NAr);   //Verificar se NAr é uma var para leitura de entrada de dados
+void Le_Quadraturas(tvQuadratura& Qua, const std::string& NAr);   //Verificar se NAr Ã© uma var para leitura de entrada de dados
 
 #endif

@@ -10,23 +10,19 @@
 class CCo
 {
 private:
-  int  N;         ///<Numero
+  int  NConfig;         ///<Numero
   std::string DIR;	    ///<Modulo de elasticidade
-  std::string ArqMAT;	///<Nome Arq Materiais;
-  std::string ArqNOS;	///<Nome Arq Nos;
-  std::string ArqELM;	///<Nome Arq Elementos;
-  std::string ArqQUA;	///<Nome Arq Quadraturas;
-  std::string ArqREL;	///<Nome Arq Relatorios;
-  std::string ArqVTK;	///<Nome Arq VTK;
+  std::string ArqMAT;	  ///<Nome Arq Materiais;
+  std::string ArqNOS;	  ///<Nome Arq Nos;
+  std::string ArqELM;	  ///<Nome Arq Elementos;
+  std::string ArqQUA;	  ///<Nome Arq Quadraturas;
+  std::string ArqREL;	  ///<Nome Arq Relatorios;
+  std::string ArqVTK;	  ///<Nome Arq VTK;
   std::string ArqCC ;   ///<Nome Arq Condeicoes de Contorno;
   std::string ArqP  ;   ///<Nome Arq Cargas Concentradas;
 public:
-<<<<<<< HEAD
-  int  r_Nconfig() {return (Nconfig);}          ///<Numero
-=======
-  int  r_N() {return (N);}                      ///<Numero
->>>>>>> 00df6377a3395294858120022aa6ed77ff0c3513
-  std::string r_DIR() {return (DIR);}           ///<Diretorio do exemplo
+  int  r_Nconfig() {return (Nconfig);}        ///<Numero
+  std::string r_DIR() {return (DIR);}         ///<Diretorio do exemplo
   std::string r_ArqMAT() {return (ArqMAT);} 	///<Nome Arq Materiais;
   std::string r_ArqNOS() {return (ArqNOS);} 	///<Nome Arq Nos;
   std::string r_ArqELM() {return (ArqELM);} 	///<Nome Arq Elementos;
